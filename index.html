@@ -613,9 +613,16 @@
                 <div class="status success">
                     ✓ Đang chia sẻ màn hình
                 </div>
+                <div class="status info">
+                    ⚠️ <strong>Demo Mode:</strong> Người xem phải mở trên <strong>cùng thiết bị này</strong> (mở tab mới). 
+                    Không thể xem từ điện thoại/máy khác.
+                </div>
                 <div class="code-display">
                     <p style="margin-bottom: 10px; color: #666;">Mã chia sẻ của bạn:</p>
                     <div class="code" id="share-code">----</div>
+                    <p style="margin-top: 10px; font-size: 14px; color: #666;">
+                        📱 Để xem từ thiết bị khác, cần deploy lên server
+                    </p>
                 </div>
                 <div class="viewer-count">
                     <span>👥 Người đang xem:</span>
@@ -652,6 +659,10 @@
         <!-- Tab Xem -->
         <div id="view-tab" class="tab-content">
             <div id="view-setup">
+                <div class="status info">
+                    ⚠️ <strong>Lưu ý:</strong> Hiện tại chỉ hoạt động trên <strong>cùng một thiết bị</strong> (demo mode). 
+                    Để xem từ thiết bị khác, cần deploy lên server với WebSocket.
+                </div>
                 <div class="input-group">
                     <label for="viewer-name-input">Tên của bạn:</label>
                     <input type="text" id="viewer-name-input" placeholder="Nhập tên của bạn" maxlength="20">
@@ -661,6 +672,14 @@
                     <input type="text" id="code-input" placeholder="Nhập mã 4 chữ số" maxlength="4">
                 </div>
                 <button onclick="joinSession()">Kết Nối</button>
+                
+                <div style="margin-top: 20px; padding: 15px; background: #e7f3ff; border-radius: 8px; font-size: 14px;">
+                    <strong>💡 Cách test trên cùng thiết bị:</strong><br>
+                    1. Mở tab mới (Ctrl+T)<br>
+                    2. Mở lại file index.html<br>
+                    3. Tab 1: Chia sẻ → Lấy mã<br>
+                    4. Tab 2: Xem → Nhập mã
+                </div>
             </div>
 
             <div id="view-active" class="hidden">
@@ -1695,7 +1714,7 @@
             // Kiểm tra session có tồn tại không
             const sessionData = localStorage.getItem(`session_${code}`);
             if (!sessionData) {
-                showStatus('error', 'Mã không hợp lệ hoặc phiên đã kết thúc');
+                showStatus('error', '❌ Mã không hợp lệ! Lưu ý: Phải mở trên CÙNG THIẾT BỊ với người chia sẻ (demo mode)');
                 return;
             }
 
